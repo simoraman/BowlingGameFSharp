@@ -55,7 +55,7 @@
     <Compile Include="Game.fs" />
     <None Include="App.config" />
     <None Include="packages.config" />
-    <Compile Include="FsUnitSample.fs" />
+    <Compile Include="BowlingGameTests.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>

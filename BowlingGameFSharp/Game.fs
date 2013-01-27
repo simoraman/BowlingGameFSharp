@@ -1,10 +1,20 @@
-﻿namespace BowlingGameFSharp
-// Learn more about F# at http://fsharp.net
-// See the 'F# Tutorial' project for more help.
+﻿module BowlingGameFSharp
+        
+let calculate_strike_score (throws: int list) = 
+    if throws.Length>3 then 10+throws.Item(1)+throws.Item(2)
+    else 10
 
+let rec score_throws (throws: int list) (score:int) =
+        if throws.IsEmpty then (score)
+        else
+            if(throws.Head=10) then score_throws throws.Tail score+calculate_strike_score(throws) 
+            elif(throws.Head+throws.Tail.Head=10) then score_throws throws.Tail.Tail (score+10+throws.Item(2))
+            else score_throws throws.Tail.Tail score+throws.Head+throws.Tail.Head
+        
 type Game =
     new()={}
-    member x.throw pins =
-        pins
     member x.score throws =
-        List.fold (fun acc x -> acc+x) 0 throws
+        score_throws throws 0
+        
+
+        
