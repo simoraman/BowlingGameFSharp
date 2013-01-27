@@ -5,16 +5,15 @@ let calculate_strike_score (throws: int list) =
     else 10
 
 let rec score_throws (throws: int list) (score:int) =
-        if throws.IsEmpty then (score)
-        else
-            if(throws.Head=10) then score_throws throws.Tail score+calculate_strike_score(throws) 
-            elif(throws.Head+throws.Tail.Head=10) then score_throws throws.Tail.Tail (score+10+throws.Item(2))
-            else score_throws throws.Tail.Tail score+throws.Head+throws.Tail.Head
+    match throws with
+    | [] -> score
+    | throws when throws.Head = 10 -> score_throws throws.Tail score+calculate_strike_score(throws) 
+    | throws when (throws.Head+throws.Tail.Head = 10) -> score_throws throws.Tail.Tail (score+10+throws.Item(2))
+    | _ -> score_throws throws.Tail.Tail score+throws.Head+throws.Tail.Head
         
 type Game =
     new()={}
-    member x.score throws =
-        score_throws throws 0
+    member x.score throws = score_throws throws 0
         
 
         
