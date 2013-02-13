@@ -34,4 +34,8 @@ type BowlingGameTests()=
         let throws = throwmany (12, 10)
         score throws |> should equal 300
 
+    [<Test>]
+    member x.``Make sure tail recursion works``()=
+        score (throwmany(2500000, 1)) |> should equal 2500000
+
   
